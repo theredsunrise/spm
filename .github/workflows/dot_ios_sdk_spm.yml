@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Update sam version
-        if: github.event.client_payload.sam_version != 'null'
+        if: github.event.client_payload.sam_version != ''
         run: |
           CHECKSUM=$(./compute_checksum.sh --component_url=https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/sam/$SAM_VERSION/Sam.zip)
           sed -i "s/\(https:\/\/s3.eu-central-1.amazonaws.com\/ios-frameworks.innovatrics.com\/sam\/\)\([0-9\.]*\)\(\/.*checksum: \"\)\(.*\)\(\"\)/\1$SAM_VERSION\3$CHECKSUM\5/g" Package_template.swift
@@ -19,7 +19,7 @@ jobs:
           SAM_VERSION: "${{github.event.client_payload.sam_version}}"
           
       - name: Update sam face version
-        if: github.event.client_payload.sam_face_version != 'null'
+        if: github.event.client_payload.sam_face_version != ''
         run: |
           CHECKSUM=$(./compute_checksum.sh --component_url=https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/sam-face/$SAM_FACE_VERSION/SamFace.zip)
           sed -i "s/\(https:\/\/s3.eu-central-1.amazonaws.com\/ios-frameworks.innovatrics.com\/sam-face\/\)\([0-9\.]*\)\(\/.*checksum: \"\)\(.*\)\(\"\)/\1$SAM_FACE_VERSION\3$CHECKSUM\5/g" Package_template.swift
@@ -27,7 +27,7 @@ jobs:
           SAM_FACE_VERSION: "${{github.event.client_payload.sam_face_version}}"
           
       - name: Update iface and onnx version
-        if: github.event.client_payload.iface_version != 'null' && github.event.client_payload.onnx_version != 'null'
+        if: github.event.client_payload.iface_version != '' && github.event.client_payload.onnx_version != ''
         run: |
           CHECKSUM=$(./compute_checksum.sh --component_url=https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/iface/$IFACE_VERSION/IFace.zip)
           sed -i "s/\(https:\/\/s3.eu-central-1.amazonaws.com\/ios-frameworks.innovatrics.com\/iface\/\)\([0-9\.]*\)\(\/.*checksum: \"\)\(.*\)\(\"\)/\1$IFACE_VERSION\3$CHECKSUM\5/g" Package_template.swift
@@ -39,7 +39,7 @@ jobs:
           ONNX_VERSION: "${{github.event.client_payload.onnx_version}}"
           
       - name: Update openssl version
-        if: github.event.client_payload.openssl_version != 'null'
+        if: github.event.client_payload.openssl_version != ''
         run: |
           CHECKSUM=$(./compute_checksum.sh --component_url=https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-openssl/$OPENSSL_VERSION/OpenSSL.zip)
           sed -i "s/\(https:\/\/s3.eu-central-1.amazonaws.com\/ios-frameworks.innovatrics.com\/dot-openssl\/\)\([0-9\.]*\)\(\/.*checksum: \"\)\(.*\)\(\"\)/\1$OPENSSL_VERSION\3$CHECKSUM\5/g" Package_template.swift
@@ -47,7 +47,7 @@ jobs:
           OPENSSL_VERSION: "${{github.event.client_payload.openssl_version}}"
 
       - name: Update protobuf version
-        if: github.event.client_payload.protobuf_version != 'null'
+        if: github.event.client_payload.protobuf_version != ''
         run: |
           CHECKSUM=$(./compute_checksum.sh --component_url=https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-protobuf/$PROTOBUF_VERSION/DotProtocolBuffers.zip)
           sed -i "s/\(https:\/\/s3.eu-central-1.amazonaws.com\/ios-frameworks.innovatrics.com\/dot-protobuf\/\)\([0-9\.]*\)\(\/.*checksum: \"\)\(.*\)\(\"\)/\1$PROTOBUF_VERSION\3$CHECKSUM\5/g" Package_template.swift
