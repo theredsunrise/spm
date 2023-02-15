@@ -89,11 +89,11 @@ CHECKSUM=$(sha256sum DotFaceCore.zip | awk '{print $1}')
 sed -i "s/{checksum_face_core}/$CHECKSUM/g" Package.swift
 
 curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-face-verification/$RELEASE_VERSION/DotFaceVerification.zip"
-CHECKSUM=$(sha256sum DotFaceVerification.zip | awk '{print $1}'
+CHECKSUM=$(sha256sum DotFaceVerification.zip | awk '{print $1}')
 sed -i "s/{checksum_verification}/$CHECKSUM/g" Package.swift
 
 curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-face-eye-gaze-liveness/$RELEASE_VERSION/DotFaceEyeGazeLiveness.zip"
-CHECKSUM=$(sha256sum DotFaceEyeGazeLiveness.zip | awk '{print $1}'
+CHECKSUM=$(sha256sum DotFaceEyeGazeLiveness.zip | awk '{print $1}')
 sed -i "s/{checksum_eye_gaze}/$CHECKSUM/g" Package.swift
 
 curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-face-expression-neutral/$RELEASE_VERSION/DotFaceExpressionNeutral.zip"
