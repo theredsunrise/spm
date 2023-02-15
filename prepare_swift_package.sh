@@ -112,7 +112,7 @@ curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/do
 CHECKSUM=$(sha256sum DotFaceDetectionBalanced.zip | awk '{print $1}')
 sed -i "s/{checksum_detection_balanced}/$CHECKSUM/g" Package.swift
 
-curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-face-passive-liveness/{version}/DotFacePassiveLiveness.zip"
+curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-face-passive-liveness/$RELEASE_VERSION/DotFacePassiveLiveness.zip"
 CHECKSUM=$(sha256sum DotFacePassiveLiveness.zip | awk '{print $1}')
 sed -i "s/{checksum_passive}/$CHECKSUM/g" Package.swift
 
