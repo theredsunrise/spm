@@ -116,7 +116,7 @@ curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/do
 CHECKSUM=$(sha256sum DotFacePassiveLiveness.zip | awk '{print $1}')
 sed -i "s/{checksum_passive}/$CHECKSUM/g" Package.swift
 
-sed -i "s/{version}/$_RELEASE_VERSION/g" Package.swift
+sed -i "s/{version}/$RELEASE_VERSION/g" Package.swift
 
 rm -rf *.zip
         
