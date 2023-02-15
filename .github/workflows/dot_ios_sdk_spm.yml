@@ -10,15 +10,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: Update iface and onnx version
+        if: github.event.client_payload.iface_version != 'null' && github.event.client_payload.onnx_version != 'null'
+        run: |
+          CHECKSUM=$(./compute_checksum.sh --component_url=https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/iface/$IFACE_VERSION/IFace.zip)
+          sed -i "s/\(https:\/\/s3.eu-central-1.amazonaws.com\/ios-frameworks.innovatrics.com\/iface\/\)\([0-9\.]*\)\(\/.*checksum: \"\)\(.*\)\(\"\)/\1$IFACE_VERSION\3$CHECKSUM\5/g" Package_template.swift
+          
+          CHECKSUM=$(./compute_checksum.sh --component_url=https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/onnx/$ONNX_VERSION/Onnx.zip)
+          sed -i "s/\(https:\/\/s3.eu-central-1.amazonaws.com\/ios-frameworks.innovatrics.com\/onnx\/\)\([0-9\.]*\)\(\/.*checksum: \"\)\(.*\)\(\"\)/\1$ONNX_VERSION\3$CHECKSUM\5/g" Package_template.swift
+        env:
+          IFACE_VERSION: "${{github.event.client_payload.iface_version}}"
+          ONNX_VERSION: "${{github.event.client_payload.onnx_version}}"
+          
       - name: Release dot-ios-sdk-spm
         run: |
-          pwd
-          ls
           ./prepare_swift_package.sh --release_version=$RELEASE_VERSION
         env: 
           RELEASE_VERSION: "${{github.event.client_payload.release_version}}"
           
-      
       - name: Push changes
         run: |
           git config --global user.name 'Theredsunrise'

@@ -29,53 +29,7 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-OPENSSL_VERSION=1.1.0
-
-SAM_VERSION=2.3.0
-SAM_FACE_VERSION=1.2.0
-
-IFACE_VERSION=5.0.3
-ONNX_VERSION=2.0.3
-
-PROTOBUF_VERSION=1.0.0
-
 cp Package_template.swift Package.swift
-
-curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/sam/$SAM_VERSION/Sam.zip"
-assert_zip_content Sam.zip
-CHECKSUM=$(sha256sum Sam.zip | awk '{print $1}')
-sed -i "s/{checksum_sam}/$CHECKSUM/g" Package.swift
-sed -i "s/{version_sam}/$SAM_VERSION/g" Package.swift
-
-curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/iface/$IFACE_VERSION/IFace.zip"
-assert_zip_content IFace.zip
-CHECKSUM=$(sha256sum IFace.zip | awk '{print $1}')
-sed -i "s/{checksum_iface}/$CHECKSUM/g" Package.swift
-sed -i "s/{version_iface}/$IFACE_VERSION/g" Package.swift
-
-curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/onnx/$ONNX_VERSION/Onnx.zip"
-assert_zip_content Onnx.zip
-CHECKSUM=$(sha256sum Onnx.zip | awk '{print $1}')
-sed -i "s/{checksum_onnx}/$CHECKSUM/g" Package.swift
-sed -i "s/{version_onnx}/$ONNX_VERSION/g" Package.swift
-
-curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-protobuf/$PROTOBUF_VERSION/DotProtocolBuffers.zip"
-assert_zip_content DotProtocolBuffers.zip
-CHECKSUM=$(sha256sum DotProtocolBuffers.zip | awk '{print $1}')
-sed -i "s/{checksum_protobuf}/$CHECKSUM/g" Package.swift
-sed -i "s/{version_protobuf}/$PROTOBUF_VERSION/g" Package.swift
-
-curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-openssl/$OPENSSL_VERSION/OpenSSL.zip"
-assert_zip_content OpenSSL.zip
-CHECKSUM=$(sha256sum OpenSSL.zip | awk '{print $1}')
-sed -i "s/{checksum_openssl}/$CHECKSUM/g" Package.swift
-sed -i "s/{version_openssl}/$OPENSSL_VERSION/g" Package.swift
-
-curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/sam-face/$SAM_FACE_VERSION/SamFace.zip"
-assert_zip_content SamFace.zip
-CHECKSUM=$(sha256sum SamFace.zip | awk '{print $1}')
-sed -i "s/{checksum_sam_face}/$CHECKSUM/g" Package.swift
-sed -i "s/{version_sam_face}/$SAM_FACE_VERSION/g" Package.swift
 
 curl -O "https://s3.eu-central-1.amazonaws.com/ios-frameworks.innovatrics.com/dot-core/$RELEASE_VERSION/DotCore.zip"
 assert_zip_content DotCore.zip
@@ -145,6 +99,7 @@ sed -i "s/{checksum_passive}/$CHECKSUM/g" Package.swift
 sed -i "s/{version}/$RELEASE_VERSION/g" Package.swift
 
 rm -rf *.zip
+exit 0
         
 
 
