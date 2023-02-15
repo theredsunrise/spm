@@ -12,7 +12,7 @@ jobs:
       
       - name: Release dot-ios-sdk-spm
         run: |
-          ./prepare_swift_package --release_version=$RELEASE_VERSION
+          ../../prepare_swift_package --release_version=$RELEASE_VERSION
         env:
           RELEASE_VERSION: "${{github.event.client_payload.release_version}}"
           
