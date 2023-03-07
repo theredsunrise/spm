@@ -66,7 +66,7 @@ jobs:
           git config --global user.email 'theredsunrise@gmail.com'
           git add *
           git commit -m "[dot_ios_sdk_spm_release workflow] release DOT iOS SDK Swift Package Manager $RELEASE_VERSION"
-          git tag -a $RELEASE_VERSION -m "$RELEASE_VERSION"
+          #git tag -a $RELEASE_VERSION -m "$RELEASE_VERSION"
           git push --follow-tags
         env:
           RELEASE_VERSION: "${{github.event.client_payload.release_version}}"
